@@ -30,6 +30,7 @@ commands:
             echo 'export BUNDLER_VERSION=$(cat Gemfile.lock | tail -1 | tr -d " ")' >> $BASH_ENV
             source $BASH_ENV
             gem install bundler
+            bundle install
 
 jobs:
   build:
@@ -37,14 +38,13 @@ jobs:
     steps:
       - checkout
       - configure_bundler
-      - run:
-          name: Which bundler?
-          command: bundle install
       
   
   rubocop:
     executor: default
     steps:
+      - checkout
+      - configure_bundler
       - run:
           name: Rubocop
           command: bundle exec rubocop app/
