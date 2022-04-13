@@ -19,6 +19,15 @@ jobs:
       - run:
           name: Which bundler?
           command: bundle -v
+  
+  rubocop:
+    docker:
+      - image: cimg/ruby:3.1.0
+    executor: ruby/default
+    steps:
+      - run:
+          name: Rubocop
+          command: rubocop app/
 
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
@@ -27,3 +36,4 @@ workflows:
     # Inside the workflow, you define the jobs you want to run.
     jobs:
       - build
+      - rubocop
