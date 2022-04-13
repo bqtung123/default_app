@@ -18,7 +18,7 @@ jobs:
       - checkout
       - run:
           name: Which bundler?
-          command: bundle -v
+          command: bundle install
   
   rubocop:
     docker:
@@ -36,4 +36,6 @@ workflows:
     # Inside the workflow, you define the jobs you want to run.
     jobs:
       - build
-      - rubocop
+      - rubocop:
+          requires:
+            - build
