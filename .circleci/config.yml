@@ -21,7 +21,6 @@ executors:
 # See: https://circleci.com/docs/2.0/configuration-reference/#jobs
 jobs:
   build:
-    docker:
     executor: default
     steps:
       - checkout
@@ -30,7 +29,6 @@ jobs:
           command: bundle install
   
   rubocop:
-    docker:
     executor: default
     steps:
       - run:
