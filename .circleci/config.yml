@@ -11,7 +11,7 @@ executors:
       - image: circleci/ruby:2.7.2
         environment:
           BUNDLE_JOBS: 3
-          BUNDLE_PATH: vendor/bundle
+          BUNDLE_PATH: ./vendor/bundle
           BUNDLE_RETRY: 3
           BUNDLER_VERSION: 2.0.1
           RAILS_ENV: test
