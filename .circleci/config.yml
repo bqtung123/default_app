@@ -7,13 +7,25 @@ version: 2.1
 orbs:
   ruby: circleci/ruby@1.4.0
 
+executors:
+  default:
+    working_directory: ~/hix_postgresql
+    docker:
+      - image: circleci/ruby:2.7.2
+        environment:
+          BUNDLE_JOBS: 3
+          BUNDLE_PATH: vendor/bundle
+          BUNDLE_RETRY: 3
+          BUNDLER_VERSION: 2.0.1
+          RAILS_ENV: test
+          DB_HOST: 127.0.0.1
+          PG_HOST: 127.0.0.1
 # Define a job to be invoked later in a workflow.
 # See: https://circleci.com/docs/2.0/configuration-reference/#jobs
 jobs:
   build:
     docker:
-      - image: cimg/ruby:3.1.0
-    executor: ruby/default
+    executor: default
     steps:
       - checkout
       - run:
@@ -22,8 +34,7 @@ jobs:
   
   rubocop:
     docker:
-      - image: cimg/ruby:3.1.0
-    executor: ruby/default
+    executor: default
     steps:
       - run:
           name: Rubocop
