@@ -24,6 +24,8 @@ commands:
   configure_bundler:
     description: Configure bundler
     steps:
+      - attach_workspace:
+          at: ~/
       - run:
           name: Configure bundler
           command: |
