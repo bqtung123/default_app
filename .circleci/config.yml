@@ -42,15 +42,15 @@ jobs:
           command: bundle install
       
   
-rubocop:
-  executor: default
-  steps:
-    - attach_workspace:
-        at: ~/
-    - configure_bundler
-    - run:
-        name: Rubocop
-        command: bundle exec rubocop
+  rubocop:
+    executor: default
+    steps:
+      - attach_workspace:
+          at: ~/
+      - configure_bundler
+      - run:
+          name: Rubocop
+          command: bundle exec rubocop
 
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
