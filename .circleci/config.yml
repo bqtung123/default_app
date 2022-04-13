@@ -26,7 +26,10 @@ commands:
     steps:
       - run:
           name: Configure bundler
-          command: gem install bundler
+          command: |
+            echo 'export BUNDLER_VERSION=$(cat Gemfile.lock | tail -1 | tr -d " ")' >> $BASH_ENV
+            source $BASH_ENV
+            gem install bundler
 
 jobs:
   build:
@@ -52,8 +55,8 @@ jobs:
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
 workflows:
-  sample: # This is the name of the workflow, feel free to change it to better match your workflow.
-    # Inside the workflow, you define the jobs you want to run.
+  version: 2
+  integration:
     jobs:
       - build
       - rubocop:
