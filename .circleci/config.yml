@@ -52,6 +52,33 @@ jobs:
       - run:
           name: Rubocop
           command: bundle exec rubocop app/
+  
+  rspec:
+    executor: default
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - hix_postgresql-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
+            - hix_postgresql-
+      - configure_bundler
+      - run:
+          name: Install bundle
+          command: bundle install
+      - run:
+          name: Wait for DB
+          command: dockerize -wait tcp://127.0.0.1:5432 -timeout 1m
+      - run:
+          name: Setup DB
+          command: bundle exec rails db:create db:schema:load --trace
+      - save_cache:
+          key: hix_postgresql-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
+          paths:
+            - vendor/bundle
+      - persist_to_workspace:
+          root: ~/
+          paths:
+            - ./hix_postgresql
 
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
@@ -63,3 +90,4 @@ workflows:
       - rubocop:
           requires:
             - build
+      - rpec
