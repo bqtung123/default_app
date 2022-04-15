@@ -86,7 +86,7 @@ jobs:
       - persist_to_workspace:
           root: ~/
           paths:
-            - ./hix
+            - ./hix_postgresql
 
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
