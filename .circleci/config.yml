@@ -90,4 +90,4 @@ workflows:
       - rubocop:
           requires:
             - build
-      - rpec
+      - rspec
