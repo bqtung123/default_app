@@ -73,4 +73,3 @@ group :test do
   gem 'webdrivers'
 end
 gem 'rubocop'
-gem "net-http"
