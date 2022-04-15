@@ -56,8 +56,6 @@ jobs:
   rspec:
     executor: default
     steps:
-      executor: default
-    steps:
       - checkout
       - restore_cache:
           keys:
