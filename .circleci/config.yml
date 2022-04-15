@@ -17,6 +17,10 @@ executors:
           RAILS_ENV: test
           DB_HOST: 127.0.0.1
           PG_HOST: 127.0.0.1
+      - image: circleci/postgres:12.0
+        environment:
+          POSTGRES_DB: default_app_test
+          POSTGRES_USER: hixonrails
 # Define a job to be invoked later in a workflow.
 # See: https://circleci.com/docs/2.0/configuration-reference/#jobs
 
@@ -38,7 +42,6 @@ jobs:
     steps:
       - checkout
       - configure_bundler
-      
   
   rubocop:
     executor: default
