@@ -73,3 +73,4 @@ group :test do
   gem 'webdrivers'
 end
 gem 'rubocop'
+gem 'dotenv-rails', groups: [:development, :test]
